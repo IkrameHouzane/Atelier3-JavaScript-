@@ -1,0 +1,22 @@
+[
+    { "name": "Ordinateur portable", "price": 999, "category": "Électronique", "stock": 10 },
+    { "name": "Téléphone", "price": 500, "category": "Électronique", "stock": 13 },
+    { "name": "clavier", "price": 30, "category": "Électronique", "stock": 15 },
+    { "name": "Tablette", "price": 350, "category": "Électronique", "stock": 20 },
+    { "name": "Imprimante", "price": 200, "category": "Électronique", "stock": 5 },
+
+    { "name": "Robe", "price": 60, "category": "Fashion", "stock": 15 },
+    { "name": "Pantalon", "price": 80, "category": "Fashion", "stock": 2 },
+    { "name": "Ensemble", "price": 150, "category": "Fashion", "stock": 9 },
+    { "name": "Talon", "price": 40, "category": "Fashion", "stock": 12 },
+
+    { "name": "Canapé", "price": 200, "category": "Maison", "stock": 11 },
+    { "name": "Sofa", "price": 100, "category": "Maison", "stock": 7 },
+    { "name": "Lit ", "price": 160, "category": "Maison", "stock": 50 },
+    { "name": "Lit double", "price": 250, "category": "Maison", "stock": 30 },
+
+    { "name": "Casque ", "price": 90, "category": "Accessoires", "stock": 4 },
+    { "name": "Chargeur ", "price": 25, "category": "Accessoires", "stock": 10 },
+    { "name": "Crayon Tablette", "price": 100, "category": "Accessoires", "stock": 22 },
+    { "name": "Sac Pc", "price": 50, "category": "Accessoires", "stock": 13 }
+]

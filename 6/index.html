@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Gestion de stock </title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+    
+        th, td {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: left;
+        }
+    
+        th {
+            background-color: #2575fc;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    
+        tr:nth-child(even) {
+            background-color: rgba(245, 245, 245, 0.9);
+        }
+    
+        tr:hover {
+            background-color: rgba(200, 200, 200, 0.9);
+            transition: background-color 0.3s ease;
+        }
+    
+        #output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            color: #333;
+        }
+    
+        button {
+            margin: 10px;
+            padding: 12px 24px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+        }
+    
+        button:hover {
+            background-color: #ff3b2f;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 59, 47, 0.6);
+        }
+    
+        input[type="file"] {
+            margin: 20px 0;
+            padding: 10px;
+            border: 2px dashed #2575fc;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    
+        input[type="file"]:hover {
+            background-color: rgba(245, 245, 245, 0.9);
+            border-color: #ff6f61;
+        }
+    
+        .form-control {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            width: 200px;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+    
+        .form-control:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.4);
+        }
+    
+        .btn-outline-success {
+            background-color: transparent;
+            border: 2px solid #2575fc;
+            color: #2575fc;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-outline-success:hover {
+            background-color: #2575fc;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+        }
+    
+        canvas {
+            margin-bottom: 20px;
+        }
+    
+        h2 {
+            color: #2575fc;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #charts {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        color: #333;
+    }
+
+    .chart-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    .chart-container canvas {
+        width: 100% !important;
+        max-width: 400px;
+        height: auto !important;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .chart-container canvas {
+            max-width: 100%;
+        }
+    }
+    </style>
+</head>
+<body>
+    <input type="file" name="inputfile" id="inputfile">
+    <br>
+
+    <pre id="output"></pre>
+    <div id="charts" style="display: none;">
+        <h2>Statistiques</h2>
+        <div class="chart-container">
+        <canvas id="categoryChart" width="400" height="200"></canvas>
+        <canvas id="priceChart" width="400" height="200"></canvas>
+        <canvas id="stockChart" width="400" height="200"></canvas>
+    </div>
+    </div>
+
+    <script>
+        let products = [];
+        document.getElementById('inputfile').addEventListener('change', function () {
+                let fr = new FileReader();
+                fr.onload = function () {
+                    try {
+            // Transformer la chaîne JSON en tableau d'objets 
+            products = JSON.parse(fr.result);
+            Afficher_Table(products);
+
+            
+        } catch (error) {
+            console.error("Erreur lors de la transformation du JSON :", error);
+            document.getElementById('output').textContent = "Erreur : Fichier JSON invalide.";
+        }
+    };
+     fr.readAsText(this.files[0]); // Lire le fichier choisi
+     
+            })
+    function Afficher_Table(Table){
+          let output = `
+               <table>
+                <thead>
+                    <tr>
+                        <th>Nom Produit</th>
+                        <th>Prix (DH)</th>
+                        <th>Categorie</th>
+                        <th>Stock</th>
+                    </tr>
+                     </thead>
+                     <tbody>`;
+                     Table.forEach(product => {
+                         output += `
+                  <tr>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td>
+                        <td>${product.category}</td>
+                        <td>${product.stock}</td>
+                    </tr>
+                `;       
+                     });
+            output +=`</tBody>
+                      </table>`;
+            output +=`<button onclick="Filter_Categorie()">Filtrer par catégorie</button>`;
+            output +=`<button onclick="tri_Prix()">Trier les produits par prix</button>`;
+            output +=`<button onclick="tri_stock()">Trier les produits par stock</button>`;
+            output +=`<button onclick="Pfaible_stock()"> les produits en faible stock</button>`;
+            output +=`<button onclick="total()">Total</button>`;
+            output +=` <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit" onclick="ChercherNom()">rechercher</button>
+      </form>`;
+            output +=`<button onclick="statistiques(products)">Statistiques</button>`;
+            document.getElementById('output').innerHTML= output;
+
+        }
+        let div = document.getElementById('charts');
+        // filtrer par catégorie 
+        function Filter_Categorie(){
+            if (div.style.display !== 'none' && div.style.display !== '') {
+                div.style.display = 'none';
+            }
+            const categorie = prompt("Entrez la catégorie à filtrer :");
+            const result = products.filter(produit =>produit.category.toLowerCase()===categorie.toLowerCase());
+            if(result.length > 0){
+                Afficher_Table(result);
+            }else{
+                document.getElementById('output').innerHTML=`<strong> Aucun produit trouvé dans cette catégorie. </strong>`;
+            }
+        }
+        
+        //tri par prix des produits 
+        function tri_Prix(){
+            if (div.style.display !== 'none' && div.style.display !== '') {
+                div.style.display = 'none';
+            }
+            products.sort((a,b) => a.price - b.price);
+            Afficher_Table(products);
+        }
+
+        // tri par stock des produits
+        function tri_stock(){
+            if (div.style.display !== 'none' && div.style.display !== '') {
+                div.style.display = 'none';
+            }
+            products.sort((a,b) => a.stock - b.stock);
+            Afficher_Table(products);
+        }
+
+        //  produits en faible quantité de stock
+        function Pfaible_stock(){
+            if (div.style.display !== 'none' && div.style.display !== '') {
+                div.style.display = 'none';
+            }
+            // seuil du stock faible
+            Pfaible = products.filter(p=> p.stock < 5);
+            Afficher_Table(Pfaible);
+        }
+        //  prix total  
+        function total(){
+            if (div.style.display !== 'none' && div.style.display !== '') {
+                div.style.display = 'none';
+            }
+            let total =products.reduce((acc,product)=>{return acc+product.price;},0);
+            alert("total est " + total + "DH");
+        }
+        
+        // recherche par nom 
+        function ChercherNom(){
+            if (div.style.display !== 'none' && div.style.display !== '') {
+                div.style.display = 'none';
+            }
+
+            let nom = document.querySelector('input[type = search ]').value;
+            produitsFiltr = products.filter(p=>p.name.toLowerCase().match(nom.toLowerCase()));
+            if(produitsFiltr.length > 0) {
+                Afficher_Table(produitsFiltr);
+            }else{
+                document.getElementById('output').innerHTML = `<strong>Aucun produit trouvé pour ce nom.</strong>`;
+        }     
+        }
+
+        // représentation graphique 
+        function statistiques(products) {
+            if (!products || products.length === 0) {
+                alert("Aucun produit disponible pour afficher les statistiques.");
+                return;
+            }
+
+            // Détruire les graphiques existants
+            const charts = document.querySelectorAll('#charts canvas');
+            charts.forEach(canvas => {
+                const chart = Chart.getChart(canvas);
+                if (chart) {
+                    chart.destroy();
+                }
+            });
+
+            // Afficher la section des graphiques
+            document.getElementById('charts').style.display = 'block';
+
+            // Graphique de répartition par catégorie
+            const categoryCounts = {};
+            products.forEach(product => {
+                categoryCounts[product.category] = (categoryCounts[product.category] || 0) + 1;
+            });
+
+            new Chart(document.getElementById('categoryChart'), {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(categoryCounts),
+                    datasets: [{
+                        data: Object.values(categoryCounts),
+                        backgroundColor: ['#4CAF50', '#FFA500', '#2196F3', '#FF5733', '#9C27B0'],
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Répartition des catégories'
+                        }
+                    }
+                }
+            });
+
+            // Graphique des prix (en courbes)
+            const sortedByPrice = [...products].sort((a, b) => a.price - b.price);
+            new Chart(document.getElementById('priceChart'), {
+                type: 'line',
+                data: {
+                    labels: sortedByPrice.map(p => p.name),
+                    datasets: [{
+                        label: 'Prix (DH)',
+                        data: sortedByPrice.map(p => p.price),
+                        borderColor: '#2196F3',
+                        fill: false
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Évolution des prix'
+                        }
+                    }
+                }
+            });
+
+            // Graphique du stock (barres)
+            new Chart(document.getElementById('stockChart'), {
+                type: 'bar',
+                data: {
+                    labels: products.map(p => p.name),
+                    datasets: [{
+                        label: 'Stock',
+                        data: products.map(p => p.stock),
+                        backgroundColor: '#FF5733'
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Stock des produits'
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+    </script>
+    
+</body>
+</html>
