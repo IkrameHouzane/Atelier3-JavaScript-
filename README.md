@@ -30,10 +30,15 @@ Dans cet exercice, on a utilisé:
 Écrire un programme fonctionnel qui divise un texte en lignes, convertit chaque ligne en majuscules, filtre les lignes contenant la lettre "I", puis les imprime.
 
 ### Détails:
+
 **split('\n')** : Divise le texte en lignes.
+
 **map** : Convertit chaque ligne en majuscules.
-**filter **: Filtre les lignes contenant la lettre "I".
+
+**filter**: Filtre les lignes contenant la lettre "I".
+
 **forEach** : Affiche les lignes filtrées.
+
 ## Exercice 4 : Trouver le nombre maximum
 
 ### Objectif:
