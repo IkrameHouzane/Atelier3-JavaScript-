@@ -63,23 +63,38 @@ Une fois toutes les valeurs parcourues, l'accumulateur contient la plus grande v
 
 **reduce** : Parcourt chaque produit et accumule le prix total TTC.
 
-**product.price * 1.25 **: Applique une TVA de 25 % à chaque produit.
+**product.price * 1.25**: Applique une TVA de 25 % à chaque produit.
 
 ## Exercice 6 : Traitement des données de produits
 
 ### Objectif:
 Créer une application web pour traiter un ensemble de données de produits. Les fonctionnalités incluent :
--Filtrer les produits par catégorie.
--Calculer le prix total des produits.
--Trouver les produits en faible stock.
--Trier les produits par prix ou par stock.
--Intégrer une barre de recherche pour trouver des produits par nom.
--Afficher les résultats sous forme de graphiques avec Chart.js.
+
+**Filtrer les produits par catégorie.**
+
+**Calculer le prix total des produits.**
+
+**Trouver les produits en faible stock.**
+
+**Trier les produits par prix ou par stock.**
+
+**Intégrer une barre de recherche pour trouver des produits par nom.**
+
+**Afficher les résultats sous forme de graphiques avec Chart.js.**
+
 ### Détails:
---Chargement du fichier JSON contenant les données des produits.
---Présentation des produits sous forme de tableau .
---Tri des produits: Trier les produits par prix ou par stock.
---Filtrage par catégorie: Affiche uniquement les produits appartenant à une catégorie spécifique. 
--- Calculer et afficher la somme des prix de tous les produits. 
--- Affichage des produits ayant un stock inférieur à 5 .
---Dashboard avec Chart.js : Affiche des graphiques interactifs pour visualiser les données des produits .
+
+**Chargement du fichier JSON contenant les données des produits.**
+
+**Présentation des produits sous forme de tableau .**
+
+**Tri des produits: Trier les produits par prix ou par stock.**
+
+**Filtrage par catégorie: Affiche uniquement les produits appartenant à une catégorie spécifique.** 
+
+**Calculer et afficher la somme des prix de tous les produits.**
+
+
+**Affichage des produits ayant un stock inférieur à 5.**
+
+**Dashboard avec Chart.js : Affiche des graphiques interactifs pour visualiser les données des produits.**
