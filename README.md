@@ -11,8 +11,9 @@ L'objectif de cet atelier est de se familiariser avec les concepts de la program
 
 ### Détails:
 Dans cet exercice, on a utilisé:
---filter : pour ne garder que les nombres pairs (num % 2 === 0).
---sort : pour trier les nombres pairs par ordre croissant ((a, b) => a - b).
+**filter** : pour ne garder que les nombres pairs (num % 2 === 0).
+
+**sort **: pour trier les nombres pairs par ordre croissant ((a, b) => a - b).
 ## Exercice 2 : Transformation de liste
 ### Objectif:
 Écrire un programme fonctionnel qui transforme une liste de nombres en une nouvelle liste où chaque élément est multiplié par son factoriel.
