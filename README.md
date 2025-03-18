@@ -14,10 +14,11 @@ Dans cet exercice, on a utilisé:
 --filter : pour ne garder que les nombres pairs (num % 2 === 0).
 --sort : pour trier les nombres pairs par ordre croissant ((a, b) => a - b).
 ## Exercice 2 : Transformation de liste
-###Objectif:
+### Objectif:
 Écrire un programme fonctionnel qui transforme une liste de nombres en une nouvelle liste où chaque élément est multiplié par son factoriel.
 ### Détails:
 **factorial** : Cette fonction récursive calcule le factoriel d'un nombre donné.
+
 **La méthode map** : parcourt chaque élément du tableau numbers et applique la fonction factorial à chaque élément.Elle retourne un nouveau tableau contenant les résultats.
 
 ## Exercice 3 : Traitement de texte
