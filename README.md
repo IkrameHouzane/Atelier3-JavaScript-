@@ -36,19 +36,23 @@ Dans cet exercice, on a utilisé:
 À partir d'une liste de nombres, trouver le nombre maximum.
 
 ### Détails:
----Initialisation : .reduce() commence avec la première valeur de la liste comme point de départ (numbers[0]).
---Comparaison : À chaque itération, l'élément courant (current) est comparé à l'accumulateur (max).
---Mise à jour : Si current est plus grand que max, max devient current. Sinon, max reste inchangé.
--- Une fois toutes les valeurs parcourues, l'accumulateur contient la plus grande valeur.
+**Initialisation** : .reduce() commence avec la première valeur de la liste comme point de départ (numbers[0]).
+**Comparaison** : À chaque itération, l'élément courant (current) est comparé à l'accumulateur (max).
+**Mise à jour** : Si current est plus grand que max, max devient current. Sinon, max reste inchangé.
+Une fois toutes les valeurs parcourues, l'accumulateur contient la plus grande valeur.
 
-###Exercice 5 : Calcul du prix total TTC
-###Objectif:
+## Exercice 5 : Calcul du prix total TTC
+
+### Objectif:
 Écrire un programme fonctionnel qui calcule le prix total de tous les produits TTC (avec une TVA de 25 %).
-###Détails:
---reduce : Parcourt chaque produit et accumule le prix total TTC.
---product.price * 1.25 : Applique une TVA de 25 % à chaque produit.
-###Exercice 6 : Traitement des données de produits
-###Objectif:
+
+### Détails:
+**reduce** : Parcourt chaque produit et accumule le prix total TTC.
+**product.price * 1.25  **: Applique une TVA de 25 % à chaque produit.
+
+## Exercice 6 : Traitement des données de produits
+
+### Objectif:
 Créer une application web pour traiter un ensemble de données de produits. Les fonctionnalités incluent :
 -Filtrer les produits par catégorie.
 -Calculer le prix total des produits.
@@ -56,7 +60,7 @@ Créer une application web pour traiter un ensemble de données de produits. Les
 -Trier les produits par prix ou par stock.
 -Intégrer une barre de recherche pour trouver des produits par nom.
 -Afficher les résultats sous forme de graphiques avec Chart.js.
-###Détails:
+### Détails:
 --Chargement du fichier JSON contenant les données des produits.
 --Présentation des produits sous forme de tableau .
 --Tri des produits: Trier les produits par prix ou par stock.
