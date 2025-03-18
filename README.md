@@ -46,18 +46,24 @@ Dans cet exercice, on a utilisé:
 
 ### Détails:
 **Initialisation** : .reduce() commence avec la première valeur de la liste comme point de départ (numbers[0]).
+
 **Comparaison** : À chaque itération, l'élément courant (current) est comparé à l'accumulateur (max).
+
 **Mise à jour** : Si current est plus grand que max, max devient current. Sinon, max reste inchangé.
+
 Une fois toutes les valeurs parcourues, l'accumulateur contient la plus grande valeur.
 
 ## Exercice 5 : Calcul du prix total TTC
 
 ### Objectif:
+
 Écrire un programme fonctionnel qui calcule le prix total de tous les produits TTC (avec une TVA de 25 %).
 
 ### Détails:
+
 **reduce** : Parcourt chaque produit et accumule le prix total TTC.
-**product.price * 1.25  **: Applique une TVA de 25 % à chaque produit.
+
+**product.price * 1.25 **: Applique une TVA de 25 % à chaque produit.
 
 ## Exercice 6 : Traitement des données de produits
 
